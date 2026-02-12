@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes,  } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Cadastro from "../pages/Cadastro/Cadastro";
 import VerificarToken from "../pages/VerificarToken/VerificarToken";
@@ -10,6 +10,8 @@ export default function AppRoutes() {
 
     return (
         <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+
             <Route path="/cadastrar" element={<Cadastro />} />
             <Route path="/verify" element={<VerificarToken />} />
             <Route path="/login" element={<Login />} />
