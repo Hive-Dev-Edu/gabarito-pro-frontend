@@ -239,7 +239,7 @@ export default function FormularioQuestao({
                             <button
                                 type="button"
                                 onClick={() => handleAlternativaCorreta(index)}
-                                className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-colors duration-200 cursor-pointer ${
+                                className={`shrink-0 w-10 h-10 rounded-full items-center justify-center font-semibold text-sm transition-colors duration-200 cursor-pointer ${
                                     alt.isCorrect
                                         ? "bg-[#2EC5B6] text-white"
                                         : "bg-gray-100 text-gray-500 hover:bg-gray-200"
