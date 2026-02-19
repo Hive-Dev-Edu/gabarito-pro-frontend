@@ -117,13 +117,13 @@ export default function DetalheQuestao() {
         <main className="min-h-screen bg-gray-50">
             <div className="max-w-3xl mx-auto px-4 py-8">
                 {/* Voltar */}
-                <Link
-                    to="/questoes"
-                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-6 transition-colors"
+                <button
+                    onClick={() => navigate(-1)}
+                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-6 transition-colors cursor-pointer"
                 >
                     <ArrowLeft size={18} />
                     Voltar
-                </Link>
+                </button>
 
                 {/* Card */}
                 <div className="bg-white p-8 rounded-2xl shadow-sm">
