@@ -85,35 +85,6 @@ export default function Dashboard() {
                         </p>
                     </Link>
                 </div>
-
-                {/* Info do usuário */}
-                <div className="mt-8 sm:mt-10 bg-white p-4 sm:p-6 rounded-2xl shadow-sm">
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 sm:mb-4">
-                        Seus dados
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-sm">
-                        <div>
-                            <span className="text-gray-400">Nome</span>
-                            <p className="font-medium text-gray-800">
-                                {usuario?.name}
-                            </p>
-                        </div>
-                        <div>
-                            <span className="text-gray-400">Email</span>
-                            <p className="font-medium text-gray-800">
-                                {usuario?.email}
-                            </p>
-                        </div>
-                        <div>
-                            <span className="text-gray-400">Perfil</span>
-                            <p className="font-medium text-gray-800">
-                                {usuario?.role === "student"
-                                    ? "Estudante"
-                                    : "Responsável"}
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </main>
     );

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { QuestoesService } from "./services/questoes.service";
 import FormularioQuestao from "./components/FormularioQuestao";
 import type {
@@ -44,18 +44,19 @@ export default function CriarQuestao() {
     return (
         <main>
             <div className="max-w-3xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
-                {/* Voltar */}
-                <Link
-                    to="/questoes"
-                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-4 sm:mb-6 transition-colors"
-                >
-                    <ArrowLeft size={18} />
-                    Voltar
-                </Link>
-
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
-                    Nova Questão
-                </h1>
+                {/* Header */}
+                <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                    <button
+                        onClick={() => navigate("/dashboard")}
+                        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer shrink-0"
+                        title="Voltar"
+                    >
+                        <ArrowLeft size={22} />
+                    </button>
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+                        Nova Questão
+                    </h1>
+                </div>
 
                 {erro && (
                     <div className="bg-red-50 border border-red-300 text-red-700 p-4 rounded-xl mb-6">

@@ -108,7 +108,7 @@ export default function ListagemQuestoes() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
                     <div className="flex items-center gap-3 sm:gap-4">
                         <button
-                            onClick={() => navigate(-1)}
+                            onClick={() => navigate("/dashboard")}
                             className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer shrink-0"
                             title="Voltar"
                         >

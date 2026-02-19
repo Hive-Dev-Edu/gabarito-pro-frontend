@@ -124,7 +124,7 @@ export default function FormularioQuestao({
 
     // ── Render ──
     return (
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
             {/* Erros globais */}
             {erros.length > 0 && (
                 <div className="bg-red-50 border border-red-300 text-red-700 p-4 rounded-xl">
@@ -145,7 +145,7 @@ export default function FormularioQuestao({
                     value={statement}
                     onChange={(e) => setStatement(e.target.value)}
                     rows={4}
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] resize-none"
+                    className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] resize-none text-sm sm:text-base"
                     placeholder="Digite o enunciado da questão..."
                 />
             </div>
@@ -159,7 +159,7 @@ export default function FormularioQuestao({
                     type="text"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6]"
+                    className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] text-sm sm:text-base"
                     placeholder="Ex: Geografia do Brasil"
                 />
             </div>
@@ -174,7 +174,7 @@ export default function FormularioQuestao({
                         type="text"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6]"
+                        className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] text-sm sm:text-base"
                         placeholder="Ex: matematica"
                     />
                 </div>
@@ -187,7 +187,7 @@ export default function FormularioQuestao({
                         type="text"
                         value={schoolYear}
                         onChange={(e) => setSchoolYear(e.target.value)}
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6]"
+                        className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] text-sm sm:text-base"
                         placeholder="Ex: 9"
                     />
                 </div>
@@ -201,7 +201,7 @@ export default function FormularioQuestao({
                         onChange={(e) =>
                             setDifficulty(e.target.value as Dificuldade)
                         }
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] bg-white"
+                        className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] bg-white text-sm sm:text-base"
                     >
                         <option value="easy">Fácil</option>
                         <option value="medium">Médio</option>
@@ -272,7 +272,7 @@ export default function FormularioQuestao({
             <button
                 type="submit"
                 disabled={carregando}
-                className="w-full py-4 bg-[#2EC5B6] text-white font-semibold rounded-xl cursor-pointer hover:bg-teal-600 transition-colors duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3.5 sm:py-4 bg-[#2EC5B6] text-white font-semibold rounded-xl cursor-pointer hover:bg-teal-600 transition-colors duration-300 disabled:opacity-50 flex items-center justify-center gap-2 text-sm sm:text-base"
             >
                 {carregando ? (
                     <>
