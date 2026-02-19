@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DashboardService, type Usuario } from "./services/dashboard.service";
 import IconeCarregamento from "../../shared/components/IconeCarregamento";
-import { LogOut, BookOpen, PlusCircle, User } from "lucide-react";
+import { BookOpen, PlusCircle } from "lucide-react";
 
 const dashboardService = new DashboardService();
 
@@ -28,68 +28,29 @@ export default function Dashboard() {
         carregar();
     }, [navigate]);
 
-    function handleLogout() {
-        localStorage.removeItem("accessToken");
-        navigate("/login", { replace: true });
-    }
-
     if (carregando) {
         return (
-            <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <main className="flex-1 flex items-center justify-center">
                 <IconeCarregamento w={32} h={32} color="black" />
             </main>
         );
     }
 
     return (
-        <main className="min-h-screen bg-gray-50">
-            {/* Header */}
-            <header className="bg-white shadow-sm">
-                <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <img
-                            src="/images/logo-gabarito-pro.png"
-                            alt="Logo Gabarito Pro"
-                            className="w-10 h-10 rounded-full"
-                        />
-                        <span className="font-semibold text-xl text-gray-800">
-                            Gabarito.pro
-                        </span>
-                    </div>
-
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2 text-gray-600">
-                            <User size={18} />
-                            <span className="text-sm font-medium">
-                                {usuario?.name}
-                            </span>
-                        </div>
-
-                        <button
-                            onClick={handleLogout}
-                            className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors duration-300 cursor-pointer"
-                        >
-                            <LogOut size={16} />
-                            Sair
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            {/* Conteúdo */}
-            <div className="max-w-5xl mx-auto px-4 py-10">
+        <main className="flex-1">
+            <div className="max-w-5xl mx-auto px-3 sm:px-4 py-6 sm:py-10">
                 {/* Saudação */}
-                <div className="mb-10">
-                    <h1 className="text-3xl font-bold text-gray-800">
+                <div className="mb-8 sm:mb-10">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
                         Olá, {usuario?.name?.split(" ")[0]}! 👋
                     </h1>
-                    <p className="text-gray-500 mt-1">
+                    <p className="text-gray-500 mt-1 text-sm sm:text-base">
                         Bem-vindo ao Gabarito Pro. O que deseja fazer hoje?
                     </p>
                 </div>
 
                 {/* Cards de ação */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {/* Questões */}
                     <Link
                         to="/questoes"
@@ -126,11 +87,11 @@ export default function Dashboard() {
                 </div>
 
                 {/* Info do usuário */}
-                <div className="mt-10 bg-white p-6 rounded-2xl shadow-sm">
-                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                <div className="mt-8 sm:mt-10 bg-white p-4 sm:p-6 rounded-2xl shadow-sm">
+                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 sm:mb-4">
                         Seus dados
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-sm">
                         <div>
                             <span className="text-gray-400">Nome</span>
                             <p className="font-medium text-gray-800">

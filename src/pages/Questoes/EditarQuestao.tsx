@@ -120,7 +120,7 @@ export default function EditarQuestao() {
     // ── Loading inicial ──
     if (carregandoInicial) {
         return (
-            <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <main className="flex-1 flex items-center justify-center">
                 <IconeCarregamento w={32} h={32} color="black" />
             </main>
         );
@@ -129,7 +129,7 @@ export default function EditarQuestao() {
     // ── Erro inicial ──
     if (erroInicial || !questaoOriginal) {
         return (
-            <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <main className="flex-1 flex items-center justify-center">
                 <div className="text-center">
                     <p className="text-red-600 text-lg mb-4">
                         {erroInicial || "Questão não encontrada."}
@@ -144,18 +144,18 @@ export default function EditarQuestao() {
 
     // ── Render ──
     return (
-        <main className="min-h-screen bg-gray-50">
-            <div className="max-w-3xl mx-auto px-4 py-8">
+        <main>
+            <div className="max-w-3xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
                 {/* Voltar */}
                 <Link
                     to={`/questoes/${id}`}
-                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-6 transition-colors"
+                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-4 sm:mb-6 transition-colors"
                 >
                     <ArrowLeft size={18} />
                     Voltar
                 </Link>
 
-                <h1 className="text-3xl font-bold text-gray-800 mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
                     Editar Questão
                 </h1>
 
@@ -165,7 +165,7 @@ export default function EditarQuestao() {
                     </div>
                 )}
 
-                <div className="bg-white p-8 rounded-2xl shadow-sm">
+                <div className="bg-white p-4 sm:p-8 rounded-2xl shadow-sm">
                     <FormularioQuestao
                         valoresIniciais={{
                             statement: questaoOriginal.statement,

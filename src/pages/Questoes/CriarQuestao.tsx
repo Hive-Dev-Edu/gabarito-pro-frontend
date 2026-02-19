@@ -42,18 +42,18 @@ export default function CriarQuestao() {
     }
 
     return (
-        <main className="min-h-screen bg-gray-50">
-            <div className="max-w-3xl mx-auto px-4 py-8">
+        <main>
+            <div className="max-w-3xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
                 {/* Voltar */}
                 <Link
                     to="/questoes"
-                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-6 transition-colors"
+                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-4 sm:mb-6 transition-colors"
                 >
                     <ArrowLeft size={18} />
                     Voltar
                 </Link>
 
-                <h1 className="text-3xl font-bold text-gray-800 mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">
                     Nova Questão
                 </h1>
 
@@ -63,7 +63,7 @@ export default function CriarQuestao() {
                     </div>
                 )}
 
-                <div className="bg-white p-8 rounded-2xl shadow-sm">
+                <div className="bg-white p-4 sm:p-8 rounded-2xl shadow-sm">
                     <FormularioQuestao
                         onSubmit={handleCriar}
                         textoBotao="Criar Questão"

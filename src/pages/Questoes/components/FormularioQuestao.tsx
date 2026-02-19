@@ -165,7 +165,7 @@ export default function FormularioQuestao({
             </div>
 
             {/* Matéria + Ano + Dificuldade */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                         Matéria
@@ -233,13 +233,16 @@ export default function FormularioQuestao({
                     </span>
                 </label>
 
-                <div className="space-y-3">
+                <div className="space-y-2.5 sm:space-y-3">
                     {alternatives.map((alt, index) => (
-                        <div key={index} className="flex items-center gap-3">
+                        <div
+                            key={index}
+                            className="flex items-center gap-2 sm:gap-3"
+                        >
                             <button
                                 type="button"
                                 onClick={() => handleAlternativaCorreta(index)}
-                                className={`shrink-0 w-10 h-10 rounded-full items-center justify-center font-semibold text-sm transition-colors duration-200 cursor-pointer ${
+                                className={`shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full items-center justify-center font-semibold text-xs sm:text-sm transition-colors duration-200 cursor-pointer ${
                                     alt.isCorrect
                                         ? "bg-[#2EC5B6] text-white"
                                         : "bg-gray-100 text-gray-500 hover:bg-gray-200"
@@ -257,7 +260,7 @@ export default function FormularioQuestao({
                                         e.target.value,
                                     )
                                 }
-                                className="flex-1 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6]"
+                                className="flex-1 min-w-0 p-2.5 sm:p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#2EC5B6] text-sm sm:text-base"
                                 placeholder={`Alternativa ${LETRAS[index]}`}
                             />
                         </div>

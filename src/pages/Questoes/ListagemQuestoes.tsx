@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { QuestoesService } from "./services/questoes.service";
 import type {
     Questao,
@@ -7,7 +7,13 @@ import type {
     Dificuldade,
 } from "./types/questoes.types";
 import IconeCarregamento from "../../shared/components/IconeCarregamento";
-import { Search, ChevronLeft, ChevronRight, Plus } from "lucide-react";
+import {
+    Search,
+    ChevronLeft,
+    ChevronRight,
+    Plus,
+    ArrowLeft,
+} from "lucide-react";
 
 const questoesService = new QuestoesService();
 
@@ -24,6 +30,7 @@ const DIFICULDADE_COR: Record<Dificuldade, string> = {
 };
 
 export default function ListagemQuestoes() {
+    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
     // ── Filtros ──
@@ -95,22 +102,32 @@ export default function ListagemQuestoes() {
 
     // ── Render ──
     return (
-        <main className="min-h-screen bg-gray-50">
-            <div className="max-w-5xl mx-auto px-4 py-8">
+        <main>
+            <div className="max-w-5xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-8">
-                    <div>
-                        <h1 className="text-3xl font-bold text-gray-800">
-                            Questões
-                        </h1>
-                        <p className="text-gray-500 mt-1">
-                            Explore questões públicas ou crie as suas próprias
-                        </p>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer shrink-0"
+                            title="Voltar"
+                        >
+                            <ArrowLeft size={22} />
+                        </button>
+                        <div>
+                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+                                Questões
+                            </h1>
+                            <p className="text-gray-500 text-sm sm:text-base mt-0.5 sm:mt-1">
+                                Explore questões públicas ou crie as suas
+                                próprias
+                            </p>
+                        </div>
                     </div>
 
                     <Link
                         to="/questoes/criar"
-                        className="flex items-center gap-2 px-5 py-3 bg-[#2EC5B6] text-white font-semibold rounded-xl hover:bg-teal-600 transition-colors duration-300"
+                        className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 bg-[#2EC5B6] text-white font-semibold rounded-xl hover:bg-teal-600 transition-colors duration-300 self-stretch sm:self-auto"
                     >
                         <Plus size={20} />
                         Nova Questão
@@ -118,8 +135,8 @@ export default function ListagemQuestoes() {
                 </div>
 
                 {/* Filtros */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm mb-6">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm mb-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
                                 Matéria
@@ -215,7 +232,7 @@ export default function ListagemQuestoes() {
                                 <Link
                                     key={questao.id}
                                     to={`/questoes/${questao.id}`}
-                                    className="block bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
+                                    className="block bg-white p-4 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
                                 >
                                     <div className="flex items-start justify-between gap-4">
                                         <div className="flex-1 min-w-0">

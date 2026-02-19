@@ -9,7 +9,8 @@ import ListagemQuestoes from "../pages/Questoes/ListagemQuestoes";
 import DetalheQuestao from "../pages/Questoes/DetalheQuestao";
 import CriarQuestao from "../pages/Questoes/CriarQuestao";
 import EditarQuestao from "../pages/Questoes/EditarQuestao";
-import RotaProtegida from "../shared/components/RotaProtegida";
+import Perfil from "../pages/Perfil/Perfil";
+import LayoutProtegido from "../shared/components/LayoutProtegido";
 
 export default function AppRoutes() {
     return (
@@ -21,47 +22,18 @@ export default function AppRoutes() {
             <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />
             <Route path="/reset-password" element={<RedefinirSenha />} />
 
-            {/* Rotas protegidas */}
-            <Route
-                path="/dashboard"
-                element={
-                    <RotaProtegida>
-                        <Dashboard />
-                    </RotaProtegida>
-                }
-            />
-            <Route
-                path="/questoes"
-                element={
-                    <RotaProtegida>
-                        <ListagemQuestoes />
-                    </RotaProtegida>
-                }
-            />
-            <Route
-                path="/questoes/criar"
-                element={
-                    <RotaProtegida>
-                        <CriarQuestao />
-                    </RotaProtegida>
-                }
-            />
-            <Route
-                path="/questoes/:id"
-                element={
-                    <RotaProtegida>
-                        <DetalheQuestao />
-                    </RotaProtegida>
-                }
-            />
-            <Route
-                path="/questoes/:id/editar"
-                element={
-                    <RotaProtegida>
-                        <EditarQuestao />
-                    </RotaProtegida>
-                }
-            />
+            {/* Rotas protegidas (com Header) */}
+            <Route element={<LayoutProtegido />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/questoes" element={<ListagemQuestoes />} />
+                <Route path="/questoes/criar" element={<CriarQuestao />} />
+                <Route path="/questoes/:id" element={<DetalheQuestao />} />
+                <Route
+                    path="/questoes/:id/editar"
+                    element={<EditarQuestao />}
+                />
+            </Route>
         </Routes>
     );
 }

@@ -91,7 +91,7 @@ export default function DetalheQuestao() {
     // ── Loading / Erro ──
     if (carregando) {
         return (
-            <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <main className="flex-1 flex items-center justify-center">
                 <IconeCarregamento w={32} h={32} color="black" />
             </main>
         );
@@ -99,7 +99,7 @@ export default function DetalheQuestao() {
 
     if (erro || !questao) {
         return (
-            <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <main className="flex-1 flex items-center justify-center">
                 <div className="text-center">
                     <p className="text-red-600 text-lg mb-4">
                         {erro || "Questão não encontrada."}
@@ -114,21 +114,21 @@ export default function DetalheQuestao() {
 
     // ── Render ──
     return (
-        <main className="min-h-screen bg-gray-50">
-            <div className="max-w-3xl mx-auto px-4 py-8">
+        <main>
+            <div className="max-w-3xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
                 {/* Voltar */}
                 <button
                     onClick={() => navigate(-1)}
-                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-6 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-4 sm:mb-6 transition-colors cursor-pointer"
                 >
                     <ArrowLeft size={18} />
                     Voltar
                 </button>
 
                 {/* Card */}
-                <div className="bg-white p-8 rounded-2xl shadow-sm">
+                <div className="bg-white p-4 sm:p-8 rounded-2xl shadow-sm">
                     {/* Header */}
-                    <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 mb-6">
                         <div className="flex flex-wrap gap-2">
                             <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
                                 {questao.subject}
@@ -183,23 +183,23 @@ export default function DetalheQuestao() {
                     </p>
 
                     {/* Enunciado */}
-                    <h2 className="text-xl font-semibold text-gray-800 mb-6">
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-6">
                         {questao.statement}
                     </h2>
 
                     {/* Alternativas */}
-                    <div className="space-y-3">
+                    <div className="space-y-2.5 sm:space-y-3">
                         {questao.alternatives.map((alt, index) => (
                             <div
                                 key={alt.id}
-                                className={`flex items-center gap-3 p-4 rounded-xl border transition-colors ${
+                                className={`flex items-start sm:items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-xl border transition-colors ${
                                     alt.isCorrect
                                         ? "border-[#2EC5B6] bg-teal-50"
                                         : "border-gray-200 bg-white"
                                 }`}
                             >
                                 <span
-                                    className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                                    className={`shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold ${
                                         alt.isCorrect
                                             ? "bg-[#2EC5B6] text-white"
                                             : "bg-gray-100 text-gray-500"
@@ -207,7 +207,7 @@ export default function DetalheQuestao() {
                                 >
                                     {LETRAS[index]}
                                 </span>
-                                <span className="text-gray-700">
+                                <span className="text-sm sm:text-base text-gray-700">
                                     {alt.text}
                                 </span>
                             </div>
