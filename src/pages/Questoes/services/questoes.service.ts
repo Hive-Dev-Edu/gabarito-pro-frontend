@@ -16,6 +16,8 @@ export class QuestoesService {
         try {
             const params = new URLSearchParams();
 
+            if (filtros.myQuestions === "false")
+                params.set("myQuestions", "false");
             if (filtros.subject) params.set("subject", filtros.subject);
             if (filtros.schoolYear)
                 params.set("schoolYear", filtros.schoolYear);
