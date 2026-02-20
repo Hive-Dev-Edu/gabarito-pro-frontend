@@ -46,6 +46,7 @@ export interface ListagemQuestoesResposta {
 // ── Filtros ──
 
 export interface FiltrosQuestao {
+    myQuestions?: string;
     subject?: string;
     schoolYear?: string;
     difficulty?: Dificuldade;
