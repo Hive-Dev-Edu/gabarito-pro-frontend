@@ -286,6 +286,17 @@ export default function ListagemQuestoes() {
                                                 </span>
                                             </div>
                                         </div>
+                                        <span
+                                            className={`text-xs px-3 py-1 rounded-full shrink-0 ${
+                                                questao.isPublic === false
+                                                    ? "bg-orange-100 text-orange-700"
+                                                    : "bg-emerald-100 text-emerald-700"
+                                            }`}
+                                        >
+                                            {questao.isPublic === false
+                                                ? "Privada"
+                                                : "Pública"}
+                                        </span>
                                     </div>
                                 </Link>
                             ))}
