@@ -266,7 +266,7 @@ export default function ListagemQuestoes() {
                                                     {questao.subject}
                                                 </span>
                                                 <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full">
-                                                    {questao.schoolYear}° ano
+                                                    {questao.schoolYear}
                                                 </span>
                                                 <span
                                                     className={`text-xs px-3 py-1 rounded-full ${
