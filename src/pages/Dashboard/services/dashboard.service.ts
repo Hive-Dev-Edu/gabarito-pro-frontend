@@ -26,7 +26,7 @@ export class DashboardService {
             const params = new URLSearchParams();
             params.set("myQuestions", "false");
             params.set("page", "1");
-            params.set("limit", "10");
+            params.set("limit", "5");
 
             const response = await httpClient.get(`/questions?${params}`);
             return response.data;
