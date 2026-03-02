@@ -54,6 +54,14 @@ export interface FiltrosQuestao {
     limit?: number;
 }
 
+export interface FiltrosQuestoesPrivadas {
+    subject?: string;
+    schoolYear?: string;
+    difficulty?: Dificuldade;
+    page?: number;
+    limit?: number;
+}
+
 // ── Criar / Atualizar ──
 
 export interface CriarQuestaoRequisicao {
