@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { LogOut, User, Home, BookOpen } from "lucide-react";
+import { LogOut, User, Home, BookOpen, Lock } from "lucide-react";
 import { obterPayloadToken } from "../../utils/auth";
 
 export default function Header() {
@@ -47,6 +47,13 @@ export default function Header() {
                         >
                             <BookOpen size={16} />
                             <span className="hidden sm:inline">Questões</span>
+                        </Link>
+                        <Link
+                            to="/questoes/privadas"
+                            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                            <Lock size={16} />
+                            <span className="hidden sm:inline">Suas Questões</span>
                         </Link>
                     </nav>
                 </div>
