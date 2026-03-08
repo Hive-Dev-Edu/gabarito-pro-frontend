@@ -12,6 +12,7 @@ import CriarQuestao from "../pages/Questoes/CriarQuestao";
 import EditarQuestao from "../pages/Questoes/EditarQuestao";
 import Perfil from "../pages/Perfil/Perfil";
 import LayoutProtegido from "../shared/components/LayoutProtegido";
+import TurmasPage from "../pages/Turmas/Turmas";
 
 export default function AppRoutes() {
     return (
@@ -38,6 +39,8 @@ export default function AppRoutes() {
                     path="/questoes/:id/editar"
                     element={<EditarQuestao />}
                 />
+                <Route path="/turmas" element={<TurmasPage />} />
+                
             </Route>
         </Routes>
     );
