@@ -13,6 +13,9 @@ import EditarQuestao from "../pages/Questoes/EditarQuestao";
 import Perfil from "../pages/Perfil/Perfil";
 import LayoutProtegido from "../shared/components/LayoutProtegido";
 import TurmasPage from "../pages/Turmas/Turmas";
+import AvaliacoesPage from "../pages/Avaliacoes/Avaliacoes";
+import NewAssessmentPage from "../pages/Avaliacoes/CriarAvaliacoes";
+import PreviewAvaliacao from "../pages/Avaliacoes/PreviewAvaliacao";
 
 export default function AppRoutes() {
     return (
@@ -40,7 +43,9 @@ export default function AppRoutes() {
                     element={<EditarQuestao />}
                 />
                 <Route path="/turmas" element={<TurmasPage />} />
-                
+                <Route path="/avaliacoes" element={<AvaliacoesPage />} />
+                <Route path="/avaliacoes/criar" element={<NewAssessmentPage />} />
+                <Route path="/avaliacoes/preview" element={<PreviewAvaliacao />} />
             </Route>
         </Routes>
     );

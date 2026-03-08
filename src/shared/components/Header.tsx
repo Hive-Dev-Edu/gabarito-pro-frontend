@@ -63,6 +63,13 @@ export default function Header() {
                             <Users size={16} />
                             <span className="hidden sm:inline">Minhas Turmas</span>
                         </Link>
+                        <Link
+                            to="/avaliacoes"
+                            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                            <BookOpen size={16} />
+                            <span className="hidden sm:inline">Avaliações</span>
+                        </Link>
                     </nav>
                 </div>
 
