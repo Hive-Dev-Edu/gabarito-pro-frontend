@@ -12,6 +12,7 @@ import {
 import AvaliacoesService from "./services/avaliacoes.service";
 import type { Avaliacao } from "./types/avaliacao.types";
 import CardRascunho from "./components/CardRascunho";
+import ModalConfirmDelete from "./components/ModalConfirmDelete";
 import IconeCarregamento from "../../shared/components/IconeCarregamento";
 
 export default function PaginaRascunhos() {
@@ -31,6 +32,12 @@ export default function PaginaRascunhos() {
 
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState("");
+  const [excluirAberto, setExcluirAberto] = useState(false);
+  const [selecionadaParaExcluir, setSelecionadaParaExcluir] = useState<{
+    id: string;
+    title?: string;
+  } | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   async function carregarRascunhos(currentPage = 1) {
     setCarregando(true);
@@ -65,18 +72,29 @@ export default function PaginaRascunhos() {
     });
   }, [rascunhos, search]);
 
-  async function excluir(id: string) {
-    const confirmou = window.confirm("Deseja apagar este rascunho?");
-    if (!confirmou) return;
+  function abrirModalExcluir(id: string, title?: string) {
+    setSelecionadaParaExcluir({ id, title });
+    setExcluirAberto(true);
+  }
 
+  function fecharModalExcluir() {
+    setExcluirAberto(false);
+    setSelecionadaParaExcluir(null);
+  }
+
+  async function confirmarExcluir() {
+    if (!selecionadaParaExcluir) return;
+    const id = selecionadaParaExcluir.id;
     try {
+      setDeletingId(id);
       await AvaliacoesService.delete(id);
-      await carregarRascunhos(page);
+      setRascunhos((prev) => prev.filter((a) => a.id !== id));
+      fecharModalExcluir();
     } catch (error) {
       console.error(error);
-      setErro(
-        error instanceof Error ? error.message : "Erro ao excluir rascunho."
-      );
+      setErro(error instanceof Error ? error.message : "Erro ao excluir rascunho.");
+    } finally {
+      setDeletingId(null);
     }
   }
 
@@ -182,7 +200,8 @@ export default function PaginaRascunhos() {
                   key={avaliacao.id}
                   avaliacao={avaliacao}
                   onEditar={(id) => navigate(`/avaliacoes/criar?id=${id}`)}
-                  onExcluir={excluir}
+                  onRequestDelete={(id) => abrirModalExcluir(id, avaliacao.title)}
+                  deleting={deletingId === avaliacao.id}
                 />
               ))}
             </div>
@@ -217,6 +236,14 @@ export default function PaginaRascunhos() {
           </>
         )}
       </div>
+      <ModalConfirmDelete
+        aberto={excluirAberto}
+        titulo={selecionadaParaExcluir?.title ?? "Excluir rascunho"}
+        descricao="Esta ação irá remover permanentemente o rascunho. Deseja continuar?"
+        loading={!!deletingId}
+        onCancel={fecharModalExcluir}
+        onConfirm={confirmarExcluir}
+      />
     </main>
   );
 }

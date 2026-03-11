@@ -60,6 +60,7 @@ export interface CreateAvaliacaoDTO {
 }
 
 export interface PaginatedAvaliacoesResponse {
+  items: Avaliacao[];
   data: Avaliacao[];
   meta: {
     total: number;

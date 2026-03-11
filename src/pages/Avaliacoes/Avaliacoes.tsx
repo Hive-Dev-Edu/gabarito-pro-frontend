@@ -15,6 +15,7 @@ import type { Avaliacao } from "./types/avaliacao.types";
 import CardAvaliacao from "./components/CardAvaliacao";
 import ModalPreviewAvaliacao from "./components/ModalPreviewAvaliacao";
 import IconeCarregamento from "../../shared/components/IconeCarregamento";
+import ModalConfirmDelete from "./components/ModalConfirmDelete";
 
 export default function AvaliacoesPage() {
   const navigate = useNavigate();
@@ -36,6 +37,12 @@ export default function AvaliacoesPage() {
   const [erro, setErro] = useState("");
   const [preview, setPreview] = useState<Avaliacao | null>(null);
   const [modalAberto, setModalAberto] = useState(false);
+  const [excluirAberto, setExcluirAberto] = useState(false);
+  const [selecionadaParaExcluir, setSelecionadaParaExcluir] = useState<{
+    id: string;
+    title?: string;
+  } | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   async function carregarAvaliacoes(currentPage = 1) {
     try {
@@ -98,6 +105,33 @@ export default function AvaliacoesPage() {
   function fecharPreview() {
     setModalAberto(false);
     setPreview(null);
+  }
+
+  function abrirModalExcluir(id: string, title?: string) {
+    setSelecionadaParaExcluir({ id, title });
+    setExcluirAberto(true);
+  }
+
+  function fecharModalExcluir() {
+    setExcluirAberto(false);
+    setSelecionadaParaExcluir(null);
+  }
+
+  async function confirmarExcluir() {
+    if (!selecionadaParaExcluir) return;
+    const id = selecionadaParaExcluir.id;
+    try {
+      setDeletingId(id);
+      await AvaliacoesService.delete(id);
+      setAvaliacoes((prev) => prev.filter((a) => a.id !== id));
+      fecharModalExcluir();
+    } catch (error) {
+      console.error("Erro ao excluir avaliação:", error);
+      // eslint-disable-next-line no-alert
+      alert(error instanceof Error ? error.message : "Erro ao excluir avaliação.");
+    } finally {
+      setDeletingId(null);
+    }
   }
 
   useEffect(() => {
@@ -228,6 +262,8 @@ export default function AvaliacoesPage() {
                     key={avaliacao.id}
                     avaliacao={avaliacao}
                     onPreview={abrirPreview}
+                    onRequestDelete={(id) => abrirModalExcluir(id, avaliacao.title)}
+                    deleting={deletingId === avaliacao.id}
                   />
                 ))}
               </div>
@@ -271,6 +307,14 @@ export default function AvaliacoesPage() {
         aberto={modalAberto}
         carregando={carregandoPreview}
         onClose={fecharPreview}
+      />
+      <ModalConfirmDelete
+        aberto={excluirAberto}
+        titulo={selecionadaParaExcluir?.title ?? "Excluir avaliação"}
+        descricao="Esta ação irá remover permanentemente a avaliação. Deseja continuar?"
+        loading={!!deletingId}
+        onCancel={fecharModalExcluir}
+        onConfirm={confirmarExcluir}
       />
     </>
   );

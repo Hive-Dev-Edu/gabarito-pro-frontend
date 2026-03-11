@@ -106,7 +106,6 @@ function normalizePaginatedResponse(raw: any): PaginatedAvaliacoesResponse {
     : Array.isArray(raw?.items)
     ? raw.items.map(normalizeAssessment)
     : [];
-
   return {
     data,
     meta: {
@@ -115,6 +114,7 @@ function normalizePaginatedResponse(raw: any): PaginatedAvaliacoesResponse {
       limit: Number(raw?.meta?.limit ?? raw?.limit ?? 10),
       totalPages: Number(raw?.meta?.totalPages ?? raw?.totalPages ?? 1),
     },
+    items: data,
   };
 }
 
@@ -185,24 +185,7 @@ class AvaliacoesService {
 
   async getById(id: string): Promise<Avaliacao> {
     const response = await httpClient.get(`/assessments/${id}`);
-    const normalized = normalizeAssessment(response.data);
-
-    // If className is missing but we have a classId, try to fetch class details
-    try {
-      if ((normalized.className ?? "").trim() === "" && normalized.classId) {
-        const classRes = await httpClient.get(`/classes/${normalized.classId}`);
-        const classData = classRes?.data ?? {};
-        const resolvedName =
-          classData?.name ?? classData?.title ?? classData?.className ?? "";
-        if (resolvedName) normalized.className = resolvedName;
-      }
-    } catch (err) {
-      // fail silently -- class name is optional
-      // eslint-disable-next-line no-console
-      console.debug("[DEBUG] não foi possível buscar turma:", err);
-    }
-
-    return normalized;
+    return normalizeAssessment(response.data);
   }
 
   async create(data: CreateAvaliacaoDTO): Promise<Avaliacao> {
