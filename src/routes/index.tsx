@@ -1,5 +1,4 @@
-import { Route, Routes } from "react-router-dom";
-import Login from "../pages/Login/Login";
+import { Route, Routes, Navigate } from "react-router-dom";import Login from "../pages/Login/Login";
 import Cadastro from "../pages/Cadastro/Cadastro";
 import VerificarToken from "../pages/VerificarToken/VerificarToken";
 import EsqueceuSenha from "../pages/EsqueceuSenha/EsqueceuSenha";
@@ -11,15 +10,21 @@ import DetalheQuestao from "../pages/Questoes/DetalheQuestao";
 import CriarQuestao from "../pages/Questoes/CriarQuestao";
 import EditarQuestao from "../pages/Questoes/EditarQuestao";
 import Perfil from "../pages/Perfil/Perfil";
-import LayoutProtegido from "../shared/components/LayoutProtegido";
 import TurmasPage from "../pages/Turmas/Turmas";
-import AvaliacoesPage from "../pages/Avaliacoes/Avaliacoes";
-import NewAssessmentPage from "../pages/Avaliacoes/CriarAvaliacoes";
-import PreviewAvaliacao from "../pages/Avaliacoes/PreviewAvaliacao";
+
+
+import LayoutProtegido from "../shared/components/LayoutProtegido";
+import PaginaAvaliacoes from "../pages/Avaliacoes/Avaliacoes";
+import CriarAvaliacao from "../pages/Avaliacoes/Criar";
+import PaginaRascunhos from "../pages/Avaliacoes/Rascunhos";
+
 
 export default function AppRoutes() {
     return (
         <Routes>
+            {/* Redireciona raiz */}
+            <Route path="/" element={<Navigate to="/login" replace />} />
+
             {/* Rotas públicas */}
             <Route path="/cadastrar" element={<Cadastro />} />
             <Route path="/verify" element={<VerificarToken />} />
@@ -43,9 +48,9 @@ export default function AppRoutes() {
                     element={<EditarQuestao />}
                 />
                 <Route path="/turmas" element={<TurmasPage />} />
-                <Route path="/avaliacoes" element={<AvaliacoesPage />} />
-                <Route path="/avaliacoes/criar" element={<NewAssessmentPage />} />
-                <Route path="/avaliacoes/preview" element={<PreviewAvaliacao />} />
+                <Route path="/avaliacoes" element={<PaginaAvaliacoes />} />
+                <Route path="/avaliacoes/criar" element={<CriarAvaliacao />} />
+                <Route path="/avaliacoes/rascunhos" element={<PaginaRascunhos />} />
             </Route>
         </Routes>
     );

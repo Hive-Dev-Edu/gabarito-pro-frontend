@@ -27,6 +27,11 @@ class TurmasService {
   async delete(id: string): Promise<void> {
     await httpClient.delete(`/classes/${id}`);
   }
+
+  async getById(id: string): Promise<Turma> {
+    const response = await httpClient.get(`/classes/${id}`);
+    return response.data;
+  }
 }
 
 export default new TurmasService();
