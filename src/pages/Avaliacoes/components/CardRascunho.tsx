@@ -4,13 +4,15 @@ import type { Avaliacao } from "../types/avaliacao.types";
 interface Props {
   avaliacao: Avaliacao;
   onEditar: (id: string) => void;
-  onExcluir: (id: string) => void;
+  onRequestDelete?: (id: string) => void;
+  deleting?: boolean;
 }
 
 export default function CardRascunho({
   avaliacao,
   onEditar,
-  onExcluir,
+  onRequestDelete,
+  deleting = false,
 }: Props) {
   const dataFormatada = avaliacao.date
     ? new Date(avaliacao.date).toLocaleDateString("pt-BR")
@@ -60,11 +62,12 @@ export default function CardRascunho({
           </button>
 
           <button
-            onClick={() => onExcluir(avaliacao.id)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[#F6D5D5] bg-white text-red-500 transition hover:bg-red-50 hover:text-red-600"
+            onClick={() => onRequestDelete?.(avaliacao.id)}
+            disabled={deleting}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[#F6D5D5] bg-white text-red-500 transition hover:bg-red-50 hover:text-red-600 disabled:opacity-60"
             title="Excluir rascunho"
           >
-            <Trash size={17} />
+            <Trash size={17} className={deleting ? "animate-spin" : undefined} />
           </button>
         </div>
       </div>

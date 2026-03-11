@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import IconeCarregamento from "../../../shared/components/IconeCarregamento";
 import { X } from "lucide-react";
 import type { CreateTurmaDTO, Turma } from "../types/turma.types";
 import type { EducationLevel } from "../../../shared/types/education.types";
@@ -235,15 +236,18 @@ export default function TurmaFormModal({
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-8 bg-[#2EC5B6] hover:bg-[#27b3a6] text-white py-3 rounded-xl font-semibold transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full mt-8 bg-[#2EC5B6] hover:bg-[#27b3a6] text-white py-3 rounded-xl font-semibold transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              {loading
-                ? mode === "create"
-                  ? "Criando turma..."
-                  : "Salvando alterações..."
-                : mode === "create"
-                ? "Criar Turma"
-                : "Salvar Alterações"}
+              {loading ? (
+                <>
+                  <IconeCarregamento w={1} h={1} />
+                  {mode === "create" ? "Criando turma..." : "Salvando alterações..."}
+                </>
+              ) : mode === "create" ? (
+                "Criar Turma"
+              ) : (
+                "Salvar Alterações"
+              )}
             </button>
           </div>
         </form>

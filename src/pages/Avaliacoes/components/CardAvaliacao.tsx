@@ -5,16 +5,20 @@ import {
   FileText,
   GraduationCap,
   Trophy,
+  Trash2,
 } from "lucide-react";
 import type { Avaliacao } from "../types/avaliacao.types";
 import AvaliacoesService from "../services/avaliacoes.service";
+import { httpClient } from "../../../utils/httpClient";
 
 interface Props {
   avaliacao: Avaliacao;
   onPreview: (id: string) => void;
+  onRequestDelete?: (id: string) => void;
+  deleting?: boolean;
 }
 
-export default function CardAvaliacao({ avaliacao, onPreview }: Props) {
+export default function CardAvaliacao({ avaliacao, onPreview, onRequestDelete, deleting = false }: Props) {
   const dataFormatada = avaliacao.date
     ? new Date(avaliacao.date).toLocaleDateString("pt-BR")
     : "Sem data";
@@ -67,6 +71,46 @@ export default function CardAvaliacao({ avaliacao, onPreview }: Props) {
       mounted = false;
     };
   }, [avaliacao.id]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function fetchClassNameIfNeeded() {
+      // se já temos nome, nada a fazer
+      if (classNameState && classNameState.trim()) return;
+
+      // tenta usar avaliacao.className primeiro
+      if (avaliacao.className && avaliacao.className.trim()) {
+        if (mounted) setClassNameState(avaliacao.className);
+        return;
+      }
+
+      // se não houver classId, nada a fazer
+      const classId = (avaliacao as any).classId ?? (avaliacao as any).class_id ?? null;
+      if (!classId) return;
+
+      try {
+        setLoadingDetails(true);
+        const resp = await httpClient.get(`/classes/${classId}`);
+        if (!mounted) return;
+        const name = resp?.data?.name ?? resp?.data?.title ?? resp?.data?.className ?? "";
+        if (name && mounted) setClassNameState(name);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.debug("[DEBUG] erro ao buscar turma por id", err);
+      } finally {
+        if (mounted) setLoadingDetails(false);
+      }
+    }
+
+    fetchClassNameIfNeeded();
+
+    return () => {
+      mounted = false;
+    };
+  }, [avaliacao.classId, avaliacao.className, avaliacao.className]);
+
+  // deletion flow is handled by parent via onRequestDelete
 
   return (
     <div className="rounded-3xl border border-[#DDEDEA] bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
@@ -121,13 +165,24 @@ export default function CardAvaliacao({ avaliacao, onPreview }: Props) {
           </div>
         </div>
 
-        <button
-          onClick={() => onPreview(avaliacao.id)}
-          className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[#D9E7E4] bg-white text-slate-600 transition hover:bg-[#F4FFFD] hover:text-[#14877B]"
-          title="Visualizar prévia"
-        >
-          <Eye size={20} />
-        </button>
+        <div className="inline-flex items-center gap-3">
+          <button
+            onClick={() => onPreview(avaliacao.id)}
+            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[#D9E7E4] bg-white text-slate-600 transition hover:bg-[#F4FFFD] hover:text-[#14877B]"
+            title="Visualizar prévia"
+          >
+            <Eye size={20} />
+          </button>
+
+          <button
+            onClick={() => onRequestDelete?.(avaliacao.id)}
+            disabled={deleting}
+            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[#F3DCD6] bg-white text-red-600 transition hover:bg-[#FFF5F4] disabled:opacity-60"
+            title="Excluir avaliação"
+          >
+            <Trash2 size={18} className={deleting ? "animate-spin" : undefined} />
+          </button>
+        </div>
       </div>
     </div>
   );

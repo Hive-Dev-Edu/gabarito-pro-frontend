@@ -141,10 +141,6 @@ export default function ModalPreviewAvaliacao({
                     <strong className="text-sm">{"-"}</strong>
                   </div>
                   <div className="border-b border-slate-400 pb-2 text-sm text-slate-800 sm:text-base">
-                    <span className="block text-xs text-slate-500">Turma</span>
-                    <strong className="text-sm">{avaliacao?.className || avaliacao?.classId || "Turma não informada"}</strong>
-                  </div>
-                  <div className="border-b border-slate-400 pb-2 text-sm text-slate-800 sm:text-base">
                     <span className="block text-xs text-slate-500">Aluno</span>
                     <strong className="text-sm">-</strong>
                   </div>
